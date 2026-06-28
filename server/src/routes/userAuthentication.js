@@ -1,5 +1,5 @@
 import express from 'express'
-import {login,register,logout,adminRegister} from '../controllers/userAuthenticate.js'
+import {login,register,logout,adminRegister, deleteProfile} from '../controllers/userAuthenticate.js'
 import userMiddleware from '../middleware/userMiddleware.js'
 import adminMiddleware from '../middleware/adminMiddleware.js'
 
@@ -14,6 +14,21 @@ authRouter.post("/login",login);
 authRouter.post("/logout",userMiddleware, logout);
 //new admin registration by existing
 authRouter.post('/admin/register',adminMiddleware,adminRegister);
+
+authRouter.delete("/profile",userMiddleware,deleteProfile);
+
+authRouter.get("/check", userMiddleware,(req,res)=>{
+    const reply = {
+        firstName:req.result.firstName,
+        emailId:req.result.emailId,
+        _id: req.result._id
+    }
+    return res.status(200).json({
+        user:reply,
+        message:"Valid user"
+    })
+});
+
 //GetProfile
 // authRouter.get("/getprofile",getProfile);
 
