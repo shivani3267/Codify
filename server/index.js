@@ -7,11 +7,27 @@ import main from './src/config/db.js'
 import cookieParser from 'cookie-parser'
 import authRouter from './src/routes/userAuthentication.js'
 import redisclient from './src/config/redis.js'
+import problemRouter from './src/routes/problemCreation.js';
+import submitRouter from './src/routes/submitroutes.js'
+import cors from 'cors'
+
 
 app.use(express.json());
 app.use(cookieParser())
 
+//API
 app.use("/user",authRouter);
+app.use("/problem",problemRouter);
+app.use("/submission",submitRouter);
+
+
+//cors 
+app.use(cors({
+    origin:'http://localhost:5173',
+    credentials:true
+}))
+
+
 
 const InitializeConnection = async () => {
     try{
