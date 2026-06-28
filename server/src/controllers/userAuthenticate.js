@@ -1,5 +1,6 @@
 import express from 'express'
 import User from '../models/user.js'
+import Submission from '../models/submission.js'
 import {validate} from '../utils/validator.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -19,14 +20,24 @@ export const register = async(req,res) => {
         if(isExists){
             throw new Error("User already exists");
         }
+       
         //hash password
         req.body.password = await bcrypt.hash(password,10);
         //save to db
        const user =  await User.create(req.body);
+        const reply={
+            firstName:user.firstName,
+            emailId:user.emailId,
+            _id:user._id,
+            role:user.role,
+        }
     
        const token = getToken({_id:user._id, role:user.role,  emailId});
        res.cookie('token',token, {maxAge:60*60*1000});
-       res.status(201).send("User created successfully");
+       res.status(201).json({
+            user:reply,
+            message:"Registered Successfully"
+        });
 
     } catch (error) {
         return res.status(400).send(error.message)
@@ -49,10 +60,19 @@ export const login = async (req,res) => {
        if(!passwordmatch){
             throw new Error("Invalid Credentials");
        }
+       const reply={
+            firstName:user.firstName,
+            emailId:user.emailId,
+            _id:user._id,
+            role:user.role,
+        }
 
        const token = getToken({_id:user._id, role:user.role, emailId});
        res.cookie('token',token, {maxAge:60*60*1000});
-       res.status(200).send("User logged in succesfully");
+       res.status(201).json({
+            user:reply,
+            message:"Logged in Successfully"
+        })
 
     }  
     catch(err){
@@ -106,3 +126,17 @@ export const adminRegister = async (req,res) => {
     }
 }
 
+
+export const deleteProfile = async (req,res) => {
+    try {
+        const userId = req.result._id;
+       await User.findByIdAndDelete(userId);
+       //delete submission history another way
+    //    await Submission.deleteMany({userId});
+
+       res.status(200).send("Deleted Successfully")
+
+    } catch (error) {
+        return res.status(500).send("INternal Server Error");
+    }
+}
