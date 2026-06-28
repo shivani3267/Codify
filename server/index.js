@@ -11,21 +11,21 @@ import problemRouter from './src/routes/problemCreation.js';
 import submitRouter from './src/routes/submitroutes.js'
 import cors from 'cors'
 
+//cors 
+app.use(cors({
+    origin:'http://localhost:5173',
+    credentials:true,
+}))
 
+//middleware
 app.use(express.json());
 app.use(cookieParser())
 
-//API
+//Routes API
 app.use("/user",authRouter);
 app.use("/problem",problemRouter);
 app.use("/submission",submitRouter);
 
-
-//cors 
-app.use(cors({
-    origin:'http://localhost:5173',
-    credentials:true
-}))
 
 
 
@@ -35,7 +35,7 @@ const InitializeConnection = async () => {
        console.log("DB connected");
     }
     catch(err){
-        console.error("DB Connection failed" + err)
+        console.error("DB Connection failed!! " + err)
         throw err;
     }
 }
