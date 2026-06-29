@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Dark Slate Gray Background -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e222b" />
+      <stop offset="100%" stop-color="#111318" />
+    </linearGradient>
+
+    <!-- Deep Tech Purple Gradient (The 'C' Bracket) -->
+    <linearGradient id="purple-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b466ff" />
+      <stop offset="100%" stop-color="#7928ca" />
+    </linearGradient>
+
+    <!-- Cool Gray Accent Gradient (The Right Bracket) -->
+    <linearGradient id="gray-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+
+    <!-- Soft Purple Ambient Glow -->
+    <filter id="purple-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Icon Drop Shadow for Depth -->
+    <filter id="icon-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- App Tile Background -->
+  <rect width="512" height="512" rx="140" fill="url(#bg-grad)" />
+
+  <!-- Central Icon Group -->
+  <g filter="url(#icon-shadow)">
+    <!-- Right Bracket (>) - Cool Gray -->
+    <path d="M 315,160 L 405,256 L 315,352" 
+          fill="none" 
+          stroke="url(#gray-grad)" 
+          stroke-width="38" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" />
+
+    <!-- Left Bracket (C-Shape) - Glowing Purple -->
+    <path d="M 225,160 L 135,256 L 225,352" 
+          fill="none" 
+          stroke="url(#purple-grad)" 
+          stroke-width="44" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          filter="url(#purple-glow)" />
+
+    <!-- Center Terminal Dot / Cursor - Vivid Purple -->
+    <circle cx="270" cy="256" r="22" fill="#d8b4fe" filter="url(#purple-glow)" />
+  </g>
+</svg>
