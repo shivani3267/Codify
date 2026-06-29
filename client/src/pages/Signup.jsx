@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, NavLink } from 'react-router';
 import { registerUser } from '../authSlice.js';
+import toast from 'react-hot-toast';
 
 
 const signupSchema = z.object({
@@ -31,8 +32,13 @@ function Signup() {
     }
   }, [isAuthenticated, navigate]);
 
-  const onSubmit = (data) => {
-    dispatch(registerUser(data));
+  const onSubmit = async (data) => {
+      try {
+          await dispatch(registerUser(data)).unwrap();
+          toast.success("Registered Successfully!")
+      } catch (error) {
+          toast.error(error);
+      }
   };
 
   return (

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router";
 import { loginUser } from "../authSlice";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const loginSchema = z.object({
   emailId: z.string().email("Invalid Email"),
@@ -35,8 +36,13 @@ function Login() {
     }
   }, [isAuthenticated, navigate]);
 
-  const onSubmit = (data) => {
-    dispatch(loginUser(data));
+  const onSubmit = async (data) => {
+    try {
+        await dispatch(loginUser(data)).unwrap();
+        toast.success("Login Successful!")
+    } catch (error) {
+        toast.error(error);
+    }
   };
 
   return (

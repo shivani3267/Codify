@@ -3,6 +3,7 @@ import { NavLink } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import axiosClient from '../utils/axiosClient.js';
 import { logoutUser } from '../authSlice.js';
+import toast from 'react-hot-toast';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -39,9 +40,14 @@ function HomePage() {
     if (user) fetchSolvedProblems();
   }, [user]);
 
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    setSolvedProblems([]); 
+  const handleLogout = async () => {
+    try {
+        await dispatch(logoutUser()).unwrap();
+        setSolvedProblems([]);
+        toast.success("Logged Out Successfully "); 
+    } catch (error) {
+        toast.error(err || "Logout failed");
+    }
   };
 
 
@@ -65,8 +71,8 @@ function HomePage() {
             <div tabIndex={0} className="btn btn-ghost">
               {user?.firstName}
             </div>
-            <ul className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-              <li><button onClick={handleLogout}>Logout</button></li>
+            <ul className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-45">
+              <li><button className='btn  btn-error' onClick={handleLogout}>Logout</button></li>
             </ul>
           </div>
         </div>
