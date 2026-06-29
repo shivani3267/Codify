@@ -4,6 +4,7 @@ import  redisclient from '../config/redis.js';
 
 const userMiddleware = async (req,res,next) => {
     try {
+        // console.log("COOKIES => ", req.cookies);
         const {token} =  req.cookies;
 
         if(!token){
@@ -22,9 +23,9 @@ const userMiddleware = async (req,res,next) => {
             throw new Error("User doesn't exists");
         }
 
-        if(result.role !== 'user'){
-            throw new Error("Invalid token");
-        }
+        // if(result.role !== 'user' || result.role !== 'admin'){
+        //     throw new Error("Invalid token");
+        // }
         
         const IsBlocked = await redisclient.exists(`token:${token}`);
         if(IsBlocked){

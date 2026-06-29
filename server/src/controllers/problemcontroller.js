@@ -120,7 +120,7 @@ export const getProblembyId = async (req,res) => {
         if(!id){
             return res.status(400).send("Problem Id missing");
         }
-        const getProblem = await Problem.findById(id).select('_id title description difficulty tags visibleTestcases startCode referenceSolution');
+        const getProblem = await Problem.findById(id).select('_id title description difficulty tags visibleTestCases startCode referenceSolution');
         if(!getProblem){
             return res.status(404).send("Problem not found")
         }
@@ -170,7 +170,7 @@ export const submittedProblem = async (req,res) => {
         if(ans.length==0){
             return res.status(200).send("No- Submissions");
         }
-        return res.status(200).send(ans);
+        return res.status(200).json(ans);
     } catch (error) {
         return res.status(500).send("Server error!!");
     }
