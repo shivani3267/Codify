@@ -13,6 +13,8 @@ export const createProblem = async (req,res) => {
         try {
             //validate data like user soln and all
             //check ref soln is valid or not
+            if(!referenceSolution || referenceSolution.length === 0) return res.status(400).send("Reference solution missing");
+
             for(const {language,completeCode} of referenceSolution){
                 //each ele is object - (lang,soln)
                  //source_code, language_id, stdin, expectedOutput for judge)API
@@ -21,7 +23,7 @@ export const createProblem = async (req,res) => {
                 //create batch submission for each language
                 const submissions = visibleTestCases.map((testcase)=> ({
                     source_code:completeCode,
-                    language_id:language_id,
+                    language_id:languageId,
                     stdin:testcase.input,
                     expected_output:testcase.output
                 } ));
@@ -31,6 +33,7 @@ export const createProblem = async (req,res) => {
                 const TestResult = await submitToken(resultToken);
 
                 for(const test of TestResult){
+                    // console.log(test)
                     if(test.status_id != 3){
                        return res.status(400).send("Error occured fails!!");
                     }

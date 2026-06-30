@@ -9,14 +9,11 @@ import { logoutUser } from "../authSlice.js";
 import Loader from "./Loader.jsx";
 
 function Profile() {
-
     const { user } = useSelector(state => state.auth);
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [solvedProblems, setSolvedProblems] = useState([]);
-
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -65,10 +62,7 @@ function Profile() {
     };
 
     if (loading) {
-        return (
-            <Loader/>
-        );
-
+        return (<Loader/>);
     }
 
     return (
