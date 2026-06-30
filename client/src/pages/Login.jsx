@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router";
 import { loginUser } from "../authSlice";
 import { useEffect, useState } from "react";
+import Logo from "../components/Logo.jsx";
+import Navbar from "../components/Navbar.jsx";
 import toast from "react-hot-toast";
 
 const loginSchema = z.object({
@@ -18,9 +20,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated, loading } = useSelector(
-    (state) => state.auth
-  );
+  const { isAuthenticated, loading } = useSelector( (state) => state.auth);
 
   const {
     register,
@@ -46,32 +46,14 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-base-200">
+    <div className="min-h-screen bg-base-200">
+    <Navbar />
+
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center p-4 bg-base-200">
       <div className="card w-96 bg-base-100 shadow-2xl">
         <div className="card-body">
-
-          {/* Logo */}
-          <div className="flex justify-center mb-8">
-            <h1 className="text-4xl md:text-5xl font-black font-mono tracking-tight select-none">
-              <span className="text-base-content/60">&lt;</span>
-
-              <span
-                className="
-                  bg-gradient-to-r
-                  from-sky-500
-                  via-blue-600
-                  to-violet-600
-                  bg-clip-text
-                  text-transparent
-                  drop-shadow-[0_0_10px_rgba(59,130,246,0.35)]
-                "
-              >
-                CODIFY
-              </span>
-
-              <span className="text-base-content/60">/&gt;</span>
-            </h1>
-          </div>
+          
+          <Logo/>
 
           <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -197,6 +179,8 @@ function Login() {
         </div>
       </div>
     </div>
+   </div>            
+  
   );
 }
 

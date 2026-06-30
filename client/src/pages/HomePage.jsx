@@ -97,13 +97,13 @@ function HomePage() {
         {/* Problems List */}
 
         <div className="grid gap-4">
-          {filteredProblems.map(problem => (
+          {filteredProblems.map((problem, ind )=> (
             <div key={problem._id} className="card bg-base-100 shadow-xl">
               <div className="card-body">
                 <div className="flex items-center justify-between">
                   <h2 className="card-title">
                     <NavLink to={`/problem/${problem._id}`} className="hover:text-primary">
-                      {problem.title}
+                      {ind+1} {". "} {problem.title}
                     </NavLink>
                   </h2>
                   {solvedProblems.some(sp => sp._id === problem._id) && (
