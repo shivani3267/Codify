@@ -10,6 +10,7 @@ import ProblemPage from './pages/ProblemPage.jsx'
 import Admin from './pages/Admin.jsx'
 import AdminDelete from './components/AdminDelete.jsx'
 import Loader from './components/Loader.jsx'
+import AdminRegister from './components/AdminRegister.jsx'
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/admin" element={isAuthenticated && user?.role === 'admin' ? <Admin /> : <Navigate to="/" />} /> 
         <Route path="/admin/create" element={isAuthenticated && user?.role === 'admin' ? <AdminPanel /> : <Navigate to="/" />} />
         <Route path="/admin/delete" element={isAuthenticated && user?.role === 'admin' ? <AdminDelete /> : <Navigate to="/" />} /> 
+        <Route path="/admin/register" element={isAuthenticated && user?.role === 'admin'? <AdminRegister/> : <Navigate to ="/"/>} />
       </Routes>
     </>
   )
