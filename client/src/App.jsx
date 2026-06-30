@@ -9,6 +9,7 @@ import AdminPanel from './components/AdminPanel.jsx'
 import ProblemPage from './pages/ProblemPage.jsx'
 import Admin from './pages/Admin.jsx'
 import AdminDelete from './components/AdminDelete.jsx'
+import Loader from './components/Loader.jsx'
 
 
 function App() {
@@ -23,11 +24,8 @@ function App() {
   
   //loader
   if(loading){
-    return <div className='min-h-screen flex items-center justify-center'>
-      <span className='loading loading-spinner loading-lg'></span>
-    </div>
+    return <Loader/>
   }
-
 
   return (
     <>
