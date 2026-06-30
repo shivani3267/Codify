@@ -33,7 +33,13 @@ export const register = async(req,res) => {
         }
     
        const token = getToken({_id:user._id, role:user.role,  emailId});
-       res.cookie('token',token, {maxAge:60*60*1000});
+    //    res.cookie('token',token, {maxAge:60*60*1000});
+    res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge:60*60*1000
+});
     //    console.log(token)
        res.status(201).json({
             user:reply,
@@ -69,7 +75,13 @@ export const login = async (req,res) => {
         }
 
        const token = getToken({_id:user._id, role:user.role, emailId});
-       res.cookie('token',token, {maxAge:60*60*1000});
+    //    res.cookie('token',token, {maxAge:60*60*1000});
+    res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge:60*60*1000
+});
     //    console.log(token)
        res.status(201).json({
             user:reply,
