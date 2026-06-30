@@ -17,15 +17,15 @@ function Admin() {
       bgColor: 'bg-success/10',
       route: '/admin/create'
     },
-    {
-      id: 'update',
-      title: 'Update Problem',
-      description: 'Edit existing problems and their details',
-      icon: Edit,
-      color: 'btn-warning',
-      bgColor: 'bg-warning/10',
-      route: '/admin/update'
-    },
+    // {
+    //   id: 'update',
+    //   title: 'Update Problem',
+    //   description: 'Edit existing problems and their details',
+    //   icon: Edit,
+    //   color: 'btn-warning',
+    //   bgColor: 'bg-warning/10',
+    //   route: '/admin/update'
+    // },
     {
       id: 'delete',
       title: 'Delete Problem',

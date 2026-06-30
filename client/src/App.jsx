@@ -11,6 +11,7 @@ import Admin from './pages/Admin.jsx'
 import AdminDelete from './components/AdminDelete.jsx'
 import Loader from './components/Loader.jsx'
 import AdminRegister from './components/AdminRegister.jsx'
+import Profile from './components/Profile.jsx'
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path='/login'  element={isAuthenticated ? <Navigate to="/" /> : <Login/>}></Route>
         <Route path='/signup'  element={isAuthenticated ? <Navigate to="/" /> : <Signup/>}></Route>
         <Route path="/problem/:problemId" element={ <ProblemPage/> }></Route>
+        <Route path="/profile" element ={isAuthenticated ? <Profile/> : <Navigate to="/"/> }></Route>
         
         <Route path="/admin" element={isAuthenticated && user?.role === 'admin' ? <Admin /> : <Navigate to="/" />} /> 
         <Route path="/admin/create" element={isAuthenticated && user?.role === 'admin' ? <AdminPanel /> : <Navigate to="/" />} />

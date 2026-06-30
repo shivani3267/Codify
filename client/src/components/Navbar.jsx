@@ -43,6 +43,11 @@ function Navbar() {
                 )}
 
                 <li>
+                  <NavLink to="/profile">
+                  View Profile</NavLink>
+                </li>
+
+                <li>
                   <button
                     onClick={() => document.getElementById("logout_modal").showModal() }
                     className="btn bg-rose-800 hover:bg-rose-900 text-white">

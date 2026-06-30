@@ -11,9 +11,9 @@ import Loader from '../components/Loader.jsx';
 
 
 const langMap = {
-        cpp: 'cpp',
-        java: 'java',
-        javascript: 'javascript'
+        cpp: 'C++',
+        java: 'Java',
+        javascript: 'JavaScript'
 };
 
 const ProblemPage = () => {
