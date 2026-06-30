@@ -14,7 +14,11 @@ import cors from 'cors'
 //cors 
 app.use(cors({
     origin:process.env.CLIENT_URL,
+    secure: true,
+    sameSite: "none",
     credentials:true,
+    secure: true,
+    sameSite: "none",
 }))
 
 //middleware
