@@ -30,7 +30,4 @@ authRouter.get("/check", userMiddleware,(req,res)=>{
     })
 });
 
-//GetProfile
-// authRouter.get("/getprofile",getProfile);
-
 export default authRouter

@@ -37,13 +37,13 @@ function Navbar() {
             {user ? (
               <>
                 {user.role === "admin" && (
-                  <li>
+                  <li className = "btn ">
                     <NavLink to="/admin">Admin</NavLink>
                   </li>
                 )}
 
-                <li>
-                  <NavLink to="/profile">
+                <li className="btn text-white text-2xl">
+                  <NavLink to="/profile" >
                   View Profile</NavLink>
                 </li>
 
@@ -57,11 +57,11 @@ function Navbar() {
               </>
             ) : (
               <>
-                <li>
+                <li className="btn text-white-100">
                   <NavLink to="/login">Login</NavLink>
                 </li>
 
-                <li>
+                <li className="btn text-white-100">
                   <NavLink to="/signup">Signup</NavLink>
                 </li>
               </>
