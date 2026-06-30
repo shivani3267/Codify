@@ -1,4 +1,4 @@
-# 🚀 Codify
+# 🚀<span>&lt;</span>CODIFY<span>/&gt;</span> 
 
 Codify is a full-stack online coding platform where users can solve programming problems, run and submit code, track submissions, and access reference solutions.
 
