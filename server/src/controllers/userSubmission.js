@@ -10,7 +10,6 @@ export const submitCode = async (req, res) => {
 
         let { code, language } = req.body;
 
-
         if (!userId || !code || !language || !problemId) {
             return res.status(400).json({
                 message: "Some fields are missing"
@@ -53,12 +52,7 @@ export const submitCode = async (req, res) => {
 
         const submitResult = await submitBatch(submissions);
 
-
-        const tokens = submitResult.map(
-            value => value.token
-        );
-
-
+        const tokens = submitResult.map( value => value.token);
         const TestResult = await submitToken(tokens);
 
         let testCasePassed = 0;
@@ -75,20 +69,14 @@ export const submitCode = async (req, res) => {
                 testCasePassed++;
 
                 runtime += Number(test.time || 0);
-                memory = Math.max(
-                    memory,
-                    Number(test.memory || 0)
-                );
-
+                memory = Math.max( memory,  Number(test.memory || 0));
             } 
             else {
 
                 status = "wrong";
-
                 if (test.status_id === 6) {
                     status = "error";
                 }
-
                 errorMessage =
                     test.stderr ||
                     test.compile_output ||
@@ -96,18 +84,12 @@ export const submitCode = async (req, res) => {
             }
         }
 
-
-
         submittedResult.status = status;
         submittedResult.testCasePassed = testCasePassed;
         submittedResult.errorMessage = errorMessage;
         submittedResult.runtime = runtime;
         submittedResult.memory = memory;
-
-
         await submittedResult.save();
-
-
 
         if (
             status === "accepted" &&
