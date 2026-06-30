@@ -4,7 +4,7 @@ import  redisclient from '../config/redis.js';
 
 const userMiddleware = async (req,res,next) => {
     try {
-        console.log("COOKIES => ", req.cookies);
+        // console.log("COOKIES => ", req.cookies);
         const {token} =  req.cookies;
 
         if(!token){
