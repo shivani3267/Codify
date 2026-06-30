@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
 import axiosClient from '../utils/axiosClient.js';
-import { logoutUser } from '../authSlice.js';
+import Navbar from '../components/Navbar.jsx';
 import toast from 'react-hot-toast';
+import {useDispatch, useSelector} from "react-redux"
+
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -23,16 +24,16 @@ function HomePage() {
         const { data } = await axiosClient.get('/problem/getAllProblem');
         setProblems(data);
       } catch (error) {
-        console.error('Error fetching problems:', error);
+        toast.error('Error fetching problems:', error);
       }
     };
 
     const fetchSolvedProblems = async () => {
       try {
-        const { data } = await axiosClient.get('/problem/problemSolvedByUser');
+        const { data } = await axiosClient.get('/problem/ProblemSolvedByUser');
         setSolvedProblems(data);
       } catch (error) {
-        console.error('Error fetching solved problems:', error);
+        toast.error('Error fetching solved problems:', error);
       }
     };
 
@@ -40,17 +41,7 @@ function HomePage() {
     if (user) fetchSolvedProblems();
   }, [user]);
 
-  const handleLogout = async () => {
-    try {
-        await dispatch(logoutUser()).unwrap();
-        setSolvedProblems([]);
-        toast.success("Logged Out Successfully "); 
-    } catch (error) {
-        toast.error(err || "Logout failed");
-    }
-  };
-
-
+  
   const filteredProblems = problems.filter(problem => {
     const difficultyMatch = filters.difficulty === 'all' || problem.difficulty === filters.difficulty;
     const tagMatch = filters.tag === 'all' || problem.tags === filters.tag;
@@ -60,23 +51,8 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-base-200">
-      {/* Navigation Bar */}
-      <nav className="navbar bg-base-100 shadow-lg px-4">
-        <div className="flex-1">
-          <NavLink to="/" className="btn btn-ghost text-xl">CODIFY</NavLink>
-        </div>
 
-        <div className="flex-none gap-4">
-          <div className="dropdown dropdown-end">
-            <div tabIndex={0} className="btn btn-ghost">
-              {user?.firstName}
-            </div>
-            <ul className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-45">
-              <li><button className='btn  btn-error' onClick={handleLogout}>Logout</button></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Navbar/>
 
       {/* Main Content */}
       <div className="container mx-auto p-4">
@@ -110,6 +86,8 @@ function HomePage() {
           >
             <option value="all">All Tags</option>
             <option value="array">Array</option>
+            <option value="stack">Stack</option>
+            <option value="queue">Queue</option>
             <option value="linkedList">Linked List</option>
             <option value="graph">Graph</option>
             <option value="dp">DP</option>
@@ -117,6 +95,7 @@ function HomePage() {
         </div>
 
         {/* Problems List */}
+
         <div className="grid gap-4">
           {filteredProblems.map(problem => (
             <div key={problem._id} className="card bg-base-100 shadow-xl">
