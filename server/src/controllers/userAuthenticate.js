@@ -38,7 +38,8 @@ export const register = async(req,res) => {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    maxAge:60*60*1000
+    maxAge:60*60*1000,
+    path: "/"
 });
     //    console.log(token)
        res.status(201).json({
@@ -80,7 +81,8 @@ export const login = async (req,res) => {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    maxAge:60*60*1000
+    maxAge:60*60*1000,
+    path: "/"
 });
     //    console.log(token)
        res.status(201).json({
